@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tutor extends Model
 {
     use HasFactory;
-    protected $table="tutor";
+    protected $table="TUTOR";
     protected $primaryKey="CODTUTOR";
     protected $fillable = [
     "CODTUTOR",
@@ -27,6 +27,6 @@ class Tutor extends Model
     public $timestamps = false;
     public function estudiantes()
     {
-        return $this->belongsToMany(Estudiante::class, 'estudiantetutor', 'CODTUTOR', 'CODESTUDIANTE');
+        return $this->belongsToMany(Estudiante::class, 'ESTUDIANTETUTOR', 'CODTUTOR', 'CODESTUDIANTE');
     }
 }

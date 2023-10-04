@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',function(){
-    return "holamundo";
+    return "holamundoFuncionaTodoBem";
 });
 
 Route::post('/agregarEstudiante',[App\Http\Controllers\EstudianteController::class,"agregarEstudiante"]);
