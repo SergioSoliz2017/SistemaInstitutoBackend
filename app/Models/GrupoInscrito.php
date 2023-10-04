@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GrupoInscrito extends Model
 {
     use HasFactory;
-    protected $table="grupoinscrito";
+    protected $table="GRUPOINSCRITO";
     protected $fillable = [
     "CODCURSOINSCRITO",
     "CANTIDADMAXIMA",
