@@ -24,7 +24,8 @@ class Estudiante extends Model
     "PAIS",
     "DEPARTAMENTO",
     "CIUDAD",
-    "HABILITADO","HUELLAESTUDIANTE"
+    "HABILITADO",
+    "HUELLAESTUDIANTE"
     ];
     public $incrementing = false;
     protected $keyType = 'string';

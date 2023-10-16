@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DpfpApi\UserRestApiController;
+use App\Http\Controllers\DpfpApi\TempFingerprintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,3 +44,8 @@ Route::get('/obtenerEstudiantes/{id}',[App\Http\Controllers\TutorController::cla
 
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
 Route::put('/acutalizarEstadoTutor/{id}', [App\Http\Controllers\TutorController::class,"actualizarDato"]);
+
+Route::post('/ejecutar-exe',[App\Http\Controllers\EjecutarExeController::class,"ejecutarExe"]);
+Route::post('/ejecutar-exe-verificar',[App\Http\Controllers\EjecutarExeController::class,"ejecutarExeVerificar"]);
+
+Route::put('/prueva',[App\Http\Controllers\EstudianteController::class,"prueba"]);
