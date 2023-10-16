@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\DpfpApi\UserRestApiController;
+use App\Http\Controllers\DpfpApi\SseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +33,15 @@ Route::get('/obtenerTutores',[App\Http\Controllers\TutorController::class,"show"
 Route::get('/obtenerCursos',[App\Http\Controllers\CursoController::class,"show"]);
 
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
+
+
+//SensorRestApi
+Route::get("/sse/{token_pc}", [SseController::class, "stream"]);
+Route::get("/ssejs/{token_pc}", [SseController::class, "streamjs"]);
+Route::post("sensor_close", [SseController::class, "update"])->name("sensor_close");
+
+//UserRestApi
+Route::post("list_finger", [UserRestApiController::class, "index"]);
+Route::post("save_finger", [UserRestApiController::class, "store"]);
+Route::post("update_finger", [UserRestApiController::class, "update"]);
+Route::post("sincronizar", [UserRestApiController::class, "sincronizar"]);

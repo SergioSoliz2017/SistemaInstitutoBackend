@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "d83a18d9e724949854529612ff664c48",
     "packages": [
         {
             "name": "brick/math",
@@ -1815,6 +1815,79 @@
                 }
             ],
             "time": "2023-08-05T12:09:49+00:00"
+        },
+        {
+            "name": "mhtutorials/dpfp4500",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mauricio870331/mh-dpfp-1.0.git",
+                "reference": "56844a75b42ae909dbaaf524006f8d81a821a606"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mauricio870331/mh-dpfp-1.0/zipball/56844a75b42ae909dbaaf524006f8d81a821a606",
+                "reference": "56844a75b42ae909dbaaf524006f8d81a821a606",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "mhtutorials\\dpfp4500\\Providers\\ServiceProvider"
+                    ],
+                    "migrations": [
+                        "database/migrations"
+                    ],
+                    "models": [
+                        "src/Models"
+                    ],
+                    "controllers": [
+                        "src/Controllers"
+                    ],
+                    "views": [
+                        "src/views"
+                    ],
+                    "publish": {
+                        "mhtutorials\\dpfp4500": [
+                            "src/Models",
+                            "src/Controllers",
+                            "src/css",
+                            "src/js",
+                            "src/views",
+                            "src/images",
+                            "src/layout"
+                        ]
+                    },
+                    "assets": {
+                        "src/js/funciones.js": "public/dpfp/js/funciones.js",
+                        "src/js/jquery-1.7.2.min.js": "public/dpfp/js/jquery-1.7.2.min.js",
+                        "src/js/reloj.js": "public/dpfp/js/reloj.js",
+                        "src/js/SweetAlert2.js": "public/dpfp/js/SweetAlert2.js"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mhtutorials\\dpfp4500\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mauricio Herrera",
+                    "email": "mauricio.herrera.ajc@gmail.com"
+                }
+            ],
+            "description": "Biometria FingerPrint-4500",
+            "support": {
+                "issues": "https://github.com/mauricio870331/mh-dpfp-1.0/issues",
+                "source": "https://github.com/mauricio870331/mh-dpfp-1.0/tree/1.0.0"
+            },
+            "time": "2023-04-17T20:20:03+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6298,16 +6371,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.6",
+            "version": "10.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364"
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/56f33548fe522c8d82da7ff3824b42829d324364",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/355324ca4980b8916c18b9db29f3ef484078f26e",
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e",
                 "shasum": ""
             },
             "require": {
@@ -6364,7 +6437,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.6"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.7"
             },
             "funding": [
                 {
@@ -6372,7 +6445,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-19T04:59:03+00:00"
+            "time": "2023-10-04T15:34:17+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

@@ -1,16 +1,16 @@
-# fly.toml app configuration file generated for instituto-backend on 2023-10-04T14:27:37-04:00
+# fly.toml app configuration file generated for sistema-instituto on 2023-10-04T15:15:26-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "instituto-backend"
+app = "sistema-instituto"
 primary_region = "scl"
 console_command = "php /var/www/html/artisan tinker"
 
 [build]
   [build.args]
     NODE_VERSION = "18"
-    PHP_VERSION = "8.2"
+    PHP_VERSION = "8.1"
 
 [env]
   APP_ENV = "production"
@@ -19,6 +19,7 @@ console_command = "php /var/www/html/artisan tinker"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   SESSION_DRIVER = "cookie"
   SESSION_SECURE_COOKIE = "true"
+  APP_URL = "https://sistema-instituto-backend.fly.dev"
 
 [http_service]
   internal_port = 8080
