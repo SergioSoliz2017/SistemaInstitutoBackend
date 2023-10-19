@@ -16,14 +16,12 @@ class EstudianteController extends Controller
         $registro->CODTRABAJADOR = $request->CODTRABAJADOR;
         $registro->FECHAINSCRIPCION = $request->FECHAINSCRIPCION;
         $registro->COSTOINSCRIPCION = $request->COSTOINSCRIPCION;
-        $registro->SEDE = $request->SEDE;
+        $registro->CODSEDE = $request->SEDE;
         $registro->HABILITADO = $request->HABILITADO;
         $registro->save();
-
-        $rutaArchivo = 'C:\Users\sergb\source\repos\HyuellaDigital\HyuellaDigital\bin\Debug\Prueba\huella.txt';
+        $rutaArchivo = 'C:/Users/sergb/source/repos/HyuellaDigital/HyuellaDigital/bin/Debug/Prueba/huella.txt';
         $contenido = file_get_contents($rutaArchivo);
-        Storage::put("/huella.txt", $contenido);
-
+        Storage::put("/" . $request->SEDE . "/huella.txt", $contenido);
         $estudiante = new Estudiante();
         $estudiante->CODESTUDIANTE = $request->CODESTUDIANTE;
         $estudiante->CODINSCRIPCION = $request->CODINSCRIPCION;
@@ -41,6 +39,7 @@ class EstudianteController extends Controller
         $estudiante->CIUDAD = $request->CIUDAD;
         $estudiante->HABILITADO = $request->HABILITADO;
         $estudiante->HUELLAESTUDIANTE = $contenido;
+        $estudiante->CODSEDE = $request->SEDE;
         $estudiante->save();
     }
 

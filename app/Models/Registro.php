@@ -11,9 +11,12 @@ class Registro extends Model
     protected $table="REGISTRO";
     protected $primaryKey="CODINSCRIPCION";
     protected $fillable = [
+    "CODINSCRIPCION",
     "CODTRABAJADOR",
     "FECHAINSCRIPCION",
-    "COSTOINSCRIPCION","SEDE","HABILITADO"];
+    "COSTOINSCRIPCION",
+    "CODSEDE",
+    "HABILITADO"];
 
     public $incrementing = false;
     protected $keyType = 'string';

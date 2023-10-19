@@ -41,6 +41,7 @@ Route::get('/darActivoTutor/{id}',[App\Http\Controllers\TutorController::class,"
 Route::get('/darInactivoTutor/{id}',[App\Http\Controllers\TutorController::class,"darInactivoTutor"]);
 Route::get('/obtenerTutores/{id}',[App\Http\Controllers\EstudianteController::class,"obtenerTutorDelEstudiante"]);
 Route::get('/obtenerEstudiantes/{id}',[App\Http\Controllers\TutorController::class,"obtenerEstudianteDelTutor"]);
+Route::get('/verificarCurso/{id}',[App\Http\Controllers\CursoController::class,"verificarCurso"]);
 
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
 Route::put('/acutalizarEstadoTutor/{id}', [App\Http\Controllers\TutorController::class,"actualizarDato"]);
@@ -49,3 +50,5 @@ Route::post('/ejecutar-exe',[App\Http\Controllers\EjecutarExeController::class,"
 Route::post('/ejecutar-exe-verificar',[App\Http\Controllers\EjecutarExeController::class,"ejecutarExeVerificar"]);
 
 Route::put('/prueva',[App\Http\Controllers\EstudianteController::class,"prueba"]);
+
+Route::delete('/eliminarGrupo',[App\Http\Controllers\GrupoController::class,"eliminarGrupo"]);

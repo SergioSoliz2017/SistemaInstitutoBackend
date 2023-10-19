@@ -9,6 +9,7 @@ class GrupoInscritoController extends Controller
 {
     public function agregarGrupoInscrito (Request $request) {
         $grupo = new GrupoInscrito();
+        $grupo->CODESTUDIANTE=$request->CODESTUDIANTE;
         $grupo->CODCURSOINSCRITO=$request->CODCURSOINSCRITO;
         $grupo->CANTIDADMAXIMA=$request->CANTIDADMAXIMA;
         $grupo->NOMBREGRUPO = $request -> NOMBREGRUPO;

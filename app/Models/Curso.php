@@ -12,7 +12,7 @@ class Curso extends Model
     protected $primaryKey="CODCURSO";
     protected $fillable = [
     "CODCURSO",
-    "CODINSCRIPCION",
+    "CODSEDE ",
     "CURSO",
     "DURACIONCURSO",];
 

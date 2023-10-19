@@ -62,7 +62,7 @@ class TutorController extends Controller
         foreach ($lista as $estudiante) {
             $estudiante->update(['HABILITADO' => "Deshabilitado"]);
         }
-        return $lista ;
+        //return $lista ;
     }
 
     public function darActivoTutor($id)
@@ -84,8 +84,8 @@ class TutorController extends Controller
         foreach ($lista as $estudiante) {
             $estudiante->update(['HABILITADO' => "Habilitado"]);
         }
-        
-        return $lista ;
+
+        //return $lista ;
     }
     public function darInactivoTutor($id)
     {
@@ -106,7 +106,7 @@ class TutorController extends Controller
         foreach ($lista as $estudiante) {
             $estudiante->update(['HABILITADO' => "Inactivo"]);
         }
-        return $lista ;
+        //return $lista ;
     }
     public function obtenerEstudianteDelTutor($id)
     {

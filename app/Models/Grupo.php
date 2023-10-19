@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Grupo extends Model
 {
     use HasFactory;
-    protected $table="GRUPO";
-    protected $fillable = [
-    "CODCURSO",
-    "NOMBREGRUPO",
-    "CANTIDADMAXIMA",];
+    protected $table = "GRUPO";
+    protected $fillable = ['CODCURSO', 'CODSEDE', 'NOMBREGRUPO', 'CANTIDADMAXIMA'];
 
     public $timestamps = false;
 }
