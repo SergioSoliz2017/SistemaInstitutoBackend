@@ -43,4 +43,22 @@ class CursoController extends Controller
         }
         return "listo";
     }
+
+    public function eliminarCurso(Request $request)
+    {
+        $datosEliminar = $request->all();
+        try {
+            Grupo::where('CODSEDE', $datosEliminar['CODSEDE'])
+                ->where('CODCURSO', $datosEliminar['CODCURSO'])
+                ->delete();
+
+            // Ahora, eliminar el curso
+            Curso::where('CODSEDE', $datosEliminar['CODSEDE'])
+                ->where('CODCURSO', $datosEliminar['CODCURSO'])
+                ->delete();
+            return response()->json(['mensaje' => 'Registro eliminado exitosamente']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al intentar eliminar el registro'], 500);
+        }
+    }
 }

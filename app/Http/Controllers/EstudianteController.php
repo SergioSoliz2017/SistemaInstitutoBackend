@@ -93,16 +93,15 @@ class EstudianteController extends Controller
 
         return $tutores;
     }
-
-    public function prueba()
+    public function actualizarDato(Request $request, $id)
     {
 
-        $rutaArchivo = 'C:\Users\sergb\source\repos\HyuellaDigital\HyuellaDigital\bin\Debug\Prueba\huella.txt';
-        $contenido = file_get_contents($rutaArchivo);
-        Storage::put("huella.txt", $contenido);
-        $estudiante = Estudiante::where("CODESTUDIANTE", "NUWESTUDIEy")->first();
-        $estudiante->HUELLAESTUDIANTE = $contenido;
-        $estudiante->save();
-        return  "listo";
+        $estudiante = Estudiante::find($id);
+        if ($estudiante) {
+            $estudiante->update(['HABILITADO' => $request->HABILITADO]);
+            return response()->json(['mensaje' => 'Dato actualizado correctamente']);
+        } else {
+            return response()->json(['mensaje' => 'Registro no encontrado'], 404);
+        }
     }
 }

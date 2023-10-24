@@ -45,10 +45,12 @@ Route::get('/verificarCurso/{id}',[App\Http\Controllers\CursoController::class,"
 
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
 Route::put('/acutalizarEstadoTutor/{id}', [App\Http\Controllers\TutorController::class,"actualizarDato"]);
+Route::put('/actualizarEstadoEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"actualizarDato"]);
 
 Route::post('/ejecutar-exe',[App\Http\Controllers\EjecutarExeController::class,"ejecutarExe"]);
 Route::post('/ejecutar-exe-verificar',[App\Http\Controllers\EjecutarExeController::class,"ejecutarExeVerificar"]);
 
-Route::put('/prueva',[App\Http\Controllers\EstudianteController::class,"prueba"]);
+Route::get('/prueva/{id}',[App\Http\Controllers\TutorController::class,"prueba"]);
 
 Route::delete('/eliminarGrupo',[App\Http\Controllers\GrupoController::class,"eliminarGrupo"]);
+Route::delete('/eliminarCurso',[App\Http\Controllers\CursoController::class,"eliminarCurso"]);

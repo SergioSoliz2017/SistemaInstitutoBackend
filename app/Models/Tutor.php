@@ -8,23 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Tutor extends Model
 {
     use HasFactory;
-    protected $table="TUTOR";
-    protected $primaryKey="CODTUTOR";
+    protected $table = "TUTOR";
+    protected $primaryKey = "CODTUTOR";
     protected $fillable = [
-    "CODTUTOR",
-    "NOMBRETUTOR",
-    "APELLIDOTUTOR",
-    "FECHANACIMIENTOTUTOR",
-    "CELULARTUTOR",
-    "GENEROTUTOR",
-    "CORREO",
-    "OCUPACION",
-    "RELACION",
-    "ESTADO"
+        "CODTUTOR",
+        "NOMBRETUTOR",
+        "APELLIDOTUTOR",
+        "FECHANACIMIENTOTUTOR",
+        "CELULARTUTOR",
+        "GENEROTUTOR",
+        "CORREO",
+        "OCUPACION",
+        "RELACION",
+        "ESTADO"
     ];
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
+
     public function estudiantes()
     {
         return $this->belongsToMany(Estudiante::class, 'ESTUDIANTETUTOR', 'CODTUTOR', 'CODESTUDIANTE');

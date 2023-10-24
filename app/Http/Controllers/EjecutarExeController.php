@@ -3,58 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Estudiante;
 
 class EjecutarExeController extends Controller
 {
     public function ejecutarExe()
     {
-        // Ruta al archivo .exe
         $rutaAlExe = 'C:\Users\sergb\source\repos\HyuellaDigital\HyuellaDigital\bin\Debug\HyuellaDigital.exe';
-
-        // Ejecutar el archivo .exe
-        $descriptorspec = array(
-            0 => array("pipe", "r"),  // stdin
-            1 => array("pipe", "w"),  // stdout
-            2 => array("pipe", "w")   // stderr
-        );
-
-        $process = proc_open("start /B " . $rutaAlExe, $descriptorspec, $pipes);
-
-        // Cerrar los descriptores de archivo no necesarios
-        fclose($pipes[0]);
-        fclose($pipes[1]);
-        fclose($pipes[2]);
-
-        // Liberar el control del proceso
-        proc_close($process);
-
-        // Devolver una respuesta rápida
-        return response()->json(['mensaje' => 'Ejecución del archivo iniciada'], 200);
+        exec($rutaAlExe, $output, $exitCode);
+        if ($exitCode === 0) {
+            return "Se cerro";
+        } else {
+            return response()->json(['mensaje' => 'Error al ejecutar el archivo'], 500);
+        }
     }
 
-    public function ejecutarExeVerificar()
+    public function ejecutarExeVerificar(Request $request)
     {
-        // Ruta al archivo .exe
+        $sede = $request->SEDE;
         $rutaAlExe = 'C:\Users\sergb\source\repos\VerificarHuella\VerificarHuella\bin\Debug\VerificarHuella.exe';
-
+        $comando = "start /B $rutaAlExe $sede";
         $descriptorspec = array(
             0 => array("pipe", "r"),  // stdin
             1 => array("pipe", "w"),  // stdout
             2 => array("pipe", "w")   // stderr
         );
-
-        $process = proc_open("start /B " . $rutaAlExe, $descriptorspec, $pipes);
-
-        // Cerrar los descriptores de archivo no necesarios
+        $process = proc_open($comando, $descriptorspec, $pipes);
         fclose($pipes[0]);
         fclose($pipes[1]);
         fclose($pipes[2]);
-
-        // Liberar el control del proceso
         proc_close($process);
-
-        // Devolver una respuesta rápida
         return response()->json(['mensaje' => 'Ejecución del archivo iniciada'], 200);
     }
 }
