@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estudiante;
 use App\Models\Estudiantetutor;
 use Illuminate\Http\Request;
 use App\Models\Tutor;
@@ -15,6 +16,7 @@ class TutorController extends Controller
         $tutor->NOMBRETUTOR = $request->NOMBRETUTOR;
         $tutor->FECHANACIMIENTOTUTOR = $request->FECHANACIMIENTOTUTOR;
         $tutor->CELULARTUTOR = $request->CELULARTUTOR;
+        $tutor->CELULARALTERNATIVO = $request->CELULARALTERNATIVO;
         $tutor->APELLIDOTUTOR = $request->APELLIDOTUTOR;
         $tutor->GENEROTUTOR = $request->GENEROTUTOR;
         $tutor->CORREO = $request->CORREO;
@@ -111,11 +113,25 @@ class TutorController extends Controller
         }
         //return $lista ;
     }
-    public function obtenerEstudianteDelTutor($id)
+    public function obtenerEstudiantesDelTutor($id)
     {
         $tutor = Tutor::find($id);
-        $estudiantes= $tutor->estudiantes;
+        $estudiantes = $tutor->estudiantes;
 
         return $estudiantes;
+    }
+    public function update(Request $request, $id)
+    {
+        $tutor = Tutor::where("CODTUTOR", $id)->first();
+        $tutor->NOMBRETUTOR = $request->NOMBRETUTOR;
+        $tutor->APELLIDOTUTOR=$request->APELLIDOTUTOR;
+        $tutor->CELULARTUTOR = $request->CELULARTUTOR;
+        $tutor->save();
+        $estudiante = Estudiante::where("CODESTUDIANTE", $id)->first();
+        if ($estudiante != null){
+            $estudiante->NOMBREESTUDIANTE = $request->NOMBRETUTOR;
+            $estudiante->APELLIDOESTUDIANTE = $request->APELLIDOTUTOR;
+            $estudiante-> save();
+        }
     }
 }

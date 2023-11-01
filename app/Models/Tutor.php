@@ -16,6 +16,7 @@ class Tutor extends Model
         "APELLIDOTUTOR",
         "FECHANACIMIENTOTUTOR",
         "CELULARTUTOR",
+        "CELULARALTERNATIVO",
         "GENEROTUTOR",
         "CORREO",
         "OCUPACION",
@@ -28,6 +29,22 @@ class Tutor extends Model
 
     public function estudiantes()
     {
-        return $this->belongsToMany(Estudiante::class, 'ESTUDIANTETUTOR', 'CODTUTOR', 'CODESTUDIANTE');
+        return $this->belongsToMany(Estudiante::class, 'ESTUDIANTETUTOR', 'CODTUTOR', 'CODESTUDIANTE')->select(
+            'ESTUDIANTE.CODESTUDIANTE',
+            'ESTUDIANTE.CODINSCRIPCION',
+            'ESTUDIANTE.NOMBREESTUDIANTE',
+            'ESTUDIANTE.APELLIDOESTUDIANTE',
+            'ESTUDIANTE.FECHANACIMIENTOESTUDIANTE',
+            'ESTUDIANTE.GENEROESTUDIANTE',
+            'ESTUDIANTE.DIRECCION',
+            'ESTUDIANTE.COLEGIO',
+            'ESTUDIANTE.TURNO',
+            'ESTUDIANTE.CURSO',
+            'ESTUDIANTE.TIPOCOLEGIO',
+            'ESTUDIANTE.PAIS',
+            'ESTUDIANTE.DEPARTAMENTO',
+            'ESTUDIANTE.CIUDAD',
+            'ESTUDIANTE.HABILITADO'
+        );
     }
 }

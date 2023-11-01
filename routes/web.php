@@ -40,9 +40,12 @@ Route::get('/darBajaTutor/{id}',[App\Http\Controllers\TutorController::class,"da
 Route::get('/darActivoTutor/{id}',[App\Http\Controllers\TutorController::class,"darActivoTutor"]);
 Route::get('/darInactivoTutor/{id}',[App\Http\Controllers\TutorController::class,"darInactivoTutor"]);
 Route::get('/obtenerTutores/{id}',[App\Http\Controllers\EstudianteController::class,"obtenerTutorDelEstudiante"]);
-Route::get('/obtenerEstudiantes/{id}',[App\Http\Controllers\TutorController::class,"obtenerEstudianteDelTutor"]);
+Route::get('/obtenerEstudiantes/{id}',[App\Http\Controllers\TutorController::class,"obtenerEstudiantesDelTutor"]);
 Route::get('/verificarCurso/{id}',[App\Http\Controllers\CursoController::class,"verificarCurso"]);
+Route::get('/obtenerDescuento',[App\Http\Controllers\DescuentoController::class,"obtenerDescuentosHabilitados"]);
+Route::get('/obtenerHorario',[App\Http\Controllers\HorarioController::class,"obtenerHorarios"]);
 
+Route::put('/actualizarTutor/{id}', [App\Http\Controllers\TutorController::class,"update"]);
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
 Route::put('/acutalizarEstadoTutor/{id}', [App\Http\Controllers\TutorController::class,"actualizarDato"]);
 Route::put('/actualizarEstadoEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"actualizarDato"]);

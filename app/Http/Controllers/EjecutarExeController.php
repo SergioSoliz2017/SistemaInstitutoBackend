@@ -6,14 +6,26 @@ use Illuminate\Http\Request;
 
 class EjecutarExeController extends Controller
 {
-    public function ejecutarExe()
+    public function ejecutarExe(Request $request)
     {
-        $rutaAlExe = 'C:\Users\sergb\source\repos\HyuellaDigital\HyuellaDigital\bin\Debug\HyuellaDigital.exe';
-        exec($rutaAlExe, $output, $exitCode);
+        $rutaAlExe = 'C:\InfinityChess\RegistrarHuella\HyuellaDigital.exe';
+        $codigoEstudiante = $request->input('CODESTUDIANTE');
+
+        $comando = "\"$rutaAlExe\" \"$codigoEstudiante\" 2>&1";
+        exec($comando, $output, $exitCode);
+
+        // Verificar si el comando se ejecutó sin errores
         if ($exitCode === 0) {
-            return "Se cerro";
+            $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $codigoEstudiante . '.txt';
+
+            // Verificar si el archivo existe después de la ejecución del comando
+            if (file_exists($rutaArchivo)) {
+                return "Existe";
+            } else {
+                return "no existe";
+            }
         } else {
-            return response()->json(['mensaje' => 'Error al ejecutar el archivo'], 500);
+            return response()->json(['mensaje' => 'Error al ejecutar el archivo', 'output' => $output], 500);
         }
     }
 

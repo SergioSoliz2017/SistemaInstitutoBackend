@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CursoInscrito extends Model
+class Descuento extends Model
 {
     use HasFactory;
-    protected $table="CURSOINSCRITO";
-    protected $primaryKey="CODCURSOINSCRITO";
+    protected $table = "DESCUENTO";
+    protected $primaryKey = "CODDESCUENTO";
     protected $fillable = [
-    "CODCURSOINSCRITO",
-    "CODESTUDIANTE ",
-    "CURSOINSCRITO",
-    "DURACIONCURSO",
-    "PRECIO"];
+        "CODDESCUENTO",
+        "NOMBREDESCUENTO",
+        "ESTADO",
+        "TIPO",
+        "CANTIDAD",
+    ];
 
     public $incrementing = false;
     protected $keyType = 'string';
