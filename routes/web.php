@@ -15,8 +15,9 @@ use App\Http\Controllers\DpfpApi\TempFingerprintController;
 */
 
 Route::get('/',function(){
-    return "holamundoFuncionaTodoBem";
+    return "holamundoas";
 });
+
 
 Route::post('/agregarEstudiante',[App\Http\Controllers\EstudianteController::class,"agregarEstudiante"]);
 Route::post('/agregarTutor',[App\Http\Controllers\TutorController::class,"agregarTutor"]);
@@ -44,6 +45,8 @@ Route::get('/obtenerEstudiantes/{id}',[App\Http\Controllers\TutorController::cla
 Route::get('/verificarCurso/{id}',[App\Http\Controllers\CursoController::class,"verificarCurso"]);
 Route::get('/obtenerDescuento',[App\Http\Controllers\DescuentoController::class,"obtenerDescuentosHabilitados"]);
 Route::get('/obtenerHorario',[App\Http\Controllers\HorarioController::class,"obtenerHorarios"]);
+Route::get('/obtenerHorarioEstudiante/{id}',[App\Http\Controllers\HorarioEstudianteController::class,"obtenerHorarios"]);
+Route::get('/obtenerAsistencia/{codEst}/{codCurso}',[App\Http\Controllers\AsistenciaController::class,"obtenerAsistencia"]);
 
 Route::put('/actualizarTutor/{id}', [App\Http\Controllers\TutorController::class,"update"]);
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);

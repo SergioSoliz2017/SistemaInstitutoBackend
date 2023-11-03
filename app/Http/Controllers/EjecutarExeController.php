@@ -13,16 +13,12 @@ class EjecutarExeController extends Controller
 
         $comando = "\"$rutaAlExe\" \"$codigoEstudiante\" 2>&1";
         exec($comando, $output, $exitCode);
-
-        // Verificar si el comando se ejecutó sin errores
         if ($exitCode === 0) {
             $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $codigoEstudiante . '.txt';
-
-            // Verificar si el archivo existe después de la ejecución del comando
             if (file_exists($rutaArchivo)) {
                 return "Existe";
             } else {
-                return "no existe";
+                return "No existe";
             }
         } else {
             return response()->json(['mensaje' => 'Error al ejecutar el archivo', 'output' => $output], 500);

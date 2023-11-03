@@ -3,7 +3,7 @@
 # Default to PHP 8.2, but we attempt to match
 # the PHP version from the user (wherever `flyctl launch` is run)
 # Valid version values are PHP 7.4+
-ARG PHP_VERSION=8.1
+ARG PHP_VERSION=8.2
 ARG NODE_VERSION=18
 FROM fideloper/fly-laravel:${PHP_VERSION} as base
 
@@ -64,7 +64,7 @@ RUN if [ -f "vite.config.js" ]; then \
         yarn install --frozen-lockfile; \
         yarn $ASSET_CMD; \
     elif [ -f "pnpm-lock.yaml" ]; then \
-        corepack enable && corepack prepare pnpm@latest-7 --activate; \
+        corepack enable && corepack prepare pnpm@latest-8 --activate; \
         pnpm install --frozen-lockfile; \
         pnpm run $ASSET_CMD; \
     elif [ -f "package-lock.json" ]; then \

@@ -6,13 +6,11 @@ storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
-
 .rr.yml
 rr
 vendor
 
 # 2. Ignore common files/directories we don't need
-fly.toml
 .vscode
 .idea
 **/*node_modules
