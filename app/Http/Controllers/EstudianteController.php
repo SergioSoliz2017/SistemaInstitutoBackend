@@ -19,29 +19,51 @@ class EstudianteController extends Controller
         $registro->COSTOINSCRIPCION = $request->COSTOINSCRIPCION;
         $registro->CODSEDE = $request->SEDE;
         $registro->HABILITADO = $request->HABILITADO;
+        $registro->SALDO = $request->SALDO;
         $registro->save();
-        $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $request->CODESTUDIANTE . '.txt';
-        $contenido = file_get_contents($rutaArchivo);
-        Storage::put("/" . $request->SEDE . '\\' . $request->CODESTUDIANTE . '.txt', $contenido);
-        $estudiante = new Estudiante();
-        $estudiante->CODESTUDIANTE = $request->CODESTUDIANTE;
-        $estudiante->CODINSCRIPCION = $request->CODINSCRIPCION;
-        $estudiante->NOMBREESTUDIANTE = $request->NOMBREESTUDIANTE;
-        $estudiante->APELLIDOESTUDIANTE = $request->APELLIDOESTUDIANTE;
-        $estudiante->FECHANACIMIENTOESTUDIANTE = $request->FECHANACIMIENTOESTUDIANTE;
-        $estudiante->GENEROESTUDIANTE = $request->GENEROESTUDIANTE;
-        $estudiante->DIRECCION = $request->DIRECCION;
-        $estudiante->COLEGIO = $request->COLEGIO;
-        $estudiante->TURNO = $request->TURNO;
-        $estudiante->CURSO = $request->CURSO;
-        $estudiante->TIPOCOLEGIO = $request->TIPOCOLEGIO;
-        $estudiante->PAIS = $request->PAIS;
-        $estudiante->DEPARTAMENTO = $request->DEPARTAMENTO;
-        $estudiante->CIUDAD = $request->CIUDAD;
-        $estudiante->HABILITADO = $request->HABILITADO;
-        $estudiante->HUELLAESTUDIANTE = $contenido;
-        $estudiante->CODSEDE = $request->SEDE;
-        $estudiante->save();
+        if ($request->HUELLA === "NoVirtual") {
+            $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $request->CODESTUDIANTE . '.txt';
+            $contenido = file_get_contents($rutaArchivo);
+            Storage::put("/" . $request->SEDE . '\\' . $request->CODESTUDIANTE . '.txt', $contenido);
+            $estudiante = new Estudiante();
+            $estudiante->CODESTUDIANTE = $request->CODESTUDIANTE;
+            $estudiante->CODINSCRIPCION = $request->CODINSCRIPCION;
+            $estudiante->NOMBREESTUDIANTE = $request->NOMBREESTUDIANTE;
+            $estudiante->APELLIDOESTUDIANTE = $request->APELLIDOESTUDIANTE;
+            $estudiante->FECHANACIMIENTOESTUDIANTE = $request->FECHANACIMIENTOESTUDIANTE;
+            $estudiante->GENEROESTUDIANTE = $request->GENEROESTUDIANTE;
+            $estudiante->DIRECCION = $request->DIRECCION;
+            $estudiante->COLEGIO = $request->COLEGIO;
+            $estudiante->TURNO = $request->TURNO;
+            $estudiante->CURSO = $request->CURSO;
+            $estudiante->TIPOCOLEGIO = $request->TIPOCOLEGIO;
+            $estudiante->PAIS = $request->PAIS;
+            $estudiante->DEPARTAMENTO = $request->DEPARTAMENTO;
+            $estudiante->CIUDAD = $request->CIUDAD;
+            $estudiante->HABILITADO = $request->HABILITADO;
+            $estudiante->HUELLAESTUDIANTE = $contenido;
+            $estudiante->CODSEDE = $request->SEDE;
+            $estudiante->save();
+        } else {
+            $estudiante = new Estudiante();
+            $estudiante->CODESTUDIANTE = $request->CODESTUDIANTE;
+            $estudiante->CODINSCRIPCION = $request->CODINSCRIPCION;
+            $estudiante->NOMBREESTUDIANTE = $request->NOMBREESTUDIANTE;
+            $estudiante->APELLIDOESTUDIANTE = $request->APELLIDOESTUDIANTE;
+            $estudiante->FECHANACIMIENTOESTUDIANTE = $request->FECHANACIMIENTOESTUDIANTE;
+            $estudiante->GENEROESTUDIANTE = $request->GENEROESTUDIANTE;
+            $estudiante->DIRECCION = $request->DIRECCION;
+            $estudiante->COLEGIO = $request->COLEGIO;
+            $estudiante->TURNO = $request->TURNO;
+            $estudiante->CURSO = $request->CURSO;
+            $estudiante->TIPOCOLEGIO = $request->TIPOCOLEGIO;
+            $estudiante->PAIS = $request->PAIS;
+            $estudiante->DEPARTAMENTO = $request->DEPARTAMENTO;
+            $estudiante->CIUDAD = $request->CIUDAD;
+            $estudiante->HABILITADO = $request->HABILITADO;
+            $estudiante->CODSEDE = $request->SEDE;
+            $estudiante->save();
+        }
     }
 
     public function show()
@@ -86,7 +108,7 @@ class EstudianteController extends Controller
         $tutor = Tutor::where("CODTUTOR", $id)->first();
         if ($tutor != null) {
             $tutor->NOMBRETUTOR = $request->NOMBREESTUDIANTE;
-            $tutor->APELLIDOTUTOR= $request->APELLIDOESTUDIANTE;
+            $tutor->APELLIDOTUTOR = $request->APELLIDOESTUDIANTE;
             $tutor->save();
         }
     }
