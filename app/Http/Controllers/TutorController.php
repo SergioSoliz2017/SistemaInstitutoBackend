@@ -36,6 +36,10 @@ class TutorController extends Controller
         return Tutor::get();
     }
 
+    public function showActivo()
+    {
+        return Tutor::where("ESTADO","Activo")->get();
+    }
     public function actualizarDato(Request $request, $id)
     {
 

@@ -33,6 +33,7 @@ Route::get('/obtenerEstudiantes',[App\Http\Controllers\EstudianteController::cla
 Route::get('/obtenerTutor/{id}', [App\Http\Controllers\TutorController::class,"buscarTutor"]);
 Route::get('/obtenerEstudiante/{id}',[App\Http\Controllers\EstudianteController::class,"buscarEstudiante"]);
 Route::get('/obtenerTutores',[App\Http\Controllers\TutorController::class,"show"]);
+Route::get('/obtenerTutoresActivos',[App\Http\Controllers\TutorController::class,"showActivo"]);
 Route::get('/obtenerCursos',[App\Http\Controllers\CursoController::class,"show"]);
 Route::get('/obtenerCurso/{id}',[App\Http\Controllers\CursoController::class,"buscarCurso"]);
 Route::get('/obtenerGrupo/{id}',[App\Http\Controllers\GrupoController::class,"buscarGrupo"]);
