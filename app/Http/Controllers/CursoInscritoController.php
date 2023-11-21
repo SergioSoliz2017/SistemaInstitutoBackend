@@ -15,36 +15,35 @@ class CursoInscritoController extends Controller
     {
         $codigoEstudiante = $request->CODESTUDIANTE;
         $listaCursos = $request->LISTACURSOS;
+
         foreach ($listaCursos as $curso) {
             $cursoN = new CursoInscrito();
             $cursoN->CODESTUDIANTE = $codigoEstudiante;
             $cursoN->CODCURSOINSCRITO = $curso['CODCURSO'];
-            $cursoN->CURSOINSCRITO = $curso['NOMBRECURSO'];
+            $cursoN->CURSOINSCRITO = $curso['CURSOINSCRITO'];
             $cursoN->ESTADO = "Habilitado";
             $cursoN->save();
-            $inicioClases = Grupo::where('CODSEDE', $curso['SEDE'])
-                ->where('CODCURSO', $curso['CODCURSO'])
-                ->where('NOMBREGRUPO', $curso['GRUPOCURSO'])
-                ->value('INICIOCLASES');
             $grupo = new GrupoInscrito();
             $grupo->CODESTUDIANTE = $codigoEstudiante;
             $grupo->CODCURSOINSCRITO = $curso['CODCURSO'];
-            $grupo->INICIOCLASES = $inicioClases;
-            $grupo->NOMBREGRUPO = $curso['GRUPOCURSO'];
+            $grupo->CODGRUPOINSCRITO = $curso['CODGRUPO'];
+            $grupo->NOMBREGRUPO = $curso['NOMBREGRUPO'];
             $grupo->ESTADO = "Habilitado";
+            $grupo->DIASPAGADOS = $curso['DIAPAGADO'];
+            $grupo->FECHAINICIO = date('Y-m-d', strtotime($request->FECHA));
             $grupo->save();
 
-            $horariosCurso = Horario::where('CODSEDE', $curso['SEDE'])
+            $horariosCurso = Horario::where('CODSEDE', $request->SEDE)
                 ->where('CODCURSO', $curso['CODCURSO'])
-                ->where('GRUPO', $curso['GRUPOCURSO'])->get();
+                ->where('CODGRUPO', $curso['CODGRUPO'])->get();
 
             foreach ($horariosCurso as $dia) {
                 $horario = new HorarioEstudiante();
                 $horario->CODESTUDIANTE = $codigoEstudiante;
                 $horario->CODCURSOINSCRITO = $curso['CODCURSO'];
+                $horario->CODGRUPOINSCRITO = $curso['CODGRUPO'];
                 $horario->DIA = $dia->DIA;
                 $horario->HORA = $dia->HORA;
-                $horario->GRUPO = $curso['GRUPOCURSO'];
                 $horario->save();
             }
         }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Estudiante extends Model
 {
     use HasFactory;
-    protected $table="ESTUDIANTE";
+    protected $table="estudiante";
     protected $primaryKey="CODESTUDIANTE";
     protected $fillable = [
     "CODESTUDIANTE",
@@ -35,6 +35,6 @@ class Estudiante extends Model
 
     public function tutores()
     {
-        return $this->belongsToMany(Tutor::class, 'ESTUDIANTETUTOR', 'CODESTUDIANTE', 'CODTUTOR');
+        return $this->belongsToMany(Tutor::class, 'ESTUDIANTETUTOR', 'CODESTUDIANTE', 'CODTUTOR')->withPivot('RELACION');
     }
 }

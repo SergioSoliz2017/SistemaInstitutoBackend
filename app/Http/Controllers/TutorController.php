@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
 use App\Models\Estudiantetutor;
+use App\Models\Relacion;
 use Illuminate\Http\Request;
 use App\Models\Tutor;
 
@@ -21,7 +22,6 @@ class TutorController extends Controller
         $tutor->GENEROTUTOR = $request->GENEROTUTOR;
         $tutor->CORREO = $request->CORREO;
         $tutor->OCUPACION = $request->OCUPACION;
-        $tutor->RELACION = $request->RELACION;
         $tutor->ESTADO = $request->ESTADO;
         $tutor->save();
     }
@@ -31,14 +31,20 @@ class TutorController extends Controller
         return Tutor::where("CODTUTOR", $id)->get();
     }
 
-    public function show()
+    public function show($sede)
     {
-        return Tutor::get();
+        if ($sede === "NACIONAL") {
+            return  Tutor::with('estudiantes')->get();
+        } else {
+            return Tutor::whereHas('estudiantes', function ($query) use ($sede) {
+                $query->where('CODSEDE', $sede);
+            })->get();
+        }
     }
 
     public function showActivo()
     {
-        return Tutor::where("ESTADO","Activo")->get();
+        return Tutor::where("ESTADO", "Activo")->get();
     }
     public function actualizarDato(Request $request, $id)
     {
@@ -128,14 +134,14 @@ class TutorController extends Controller
     {
         $tutor = Tutor::where("CODTUTOR", $id)->first();
         $tutor->NOMBRETUTOR = $request->NOMBRETUTOR;
-        $tutor->APELLIDOTUTOR=$request->APELLIDOTUTOR;
+        $tutor->APELLIDOTUTOR = $request->APELLIDOTUTOR;
         $tutor->CELULARTUTOR = $request->CELULARTUTOR;
         $tutor->save();
         $estudiante = Estudiante::where("CODESTUDIANTE", $id)->first();
-        if ($estudiante != null){
+        if ($estudiante != null) {
             $estudiante->NOMBREESTUDIANTE = $request->NOMBRETUTOR;
             $estudiante->APELLIDOESTUDIANTE = $request->APELLIDOTUTOR;
-            $estudiante-> save();
+            $estudiante->save();
         }
     }
 }

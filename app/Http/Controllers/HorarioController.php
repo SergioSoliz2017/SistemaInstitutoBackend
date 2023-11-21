@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
-    public function obtenerHorarios()
+    public function obtenerHorarios(Request $request)
     {
-        return Horario::join('CURSO', 'HORARIO.CODCURSO', '=', 'CURSO.CODCURSO')
-            ->select('HORARIO.*', 'CURSO.CURSO')
-            ->get();
+        return Horario::join('curso', 'horario.CODCURSO', '=', 'curso.CODCURSO')
+        ->join('grupo', 'horario.CODGRUPO', '=', 'grupo.CODGRUPO')
+        ->where('horario.CODCURSO', $request->CODCURSO)
+        ->where('horario.CODSEDE', $request->CODSEDE)
+        ->where('horario.CODGRUPO', $request->CODGRUPO)
+        ->select('horario.*', 'curso.CURSO', 'grupo.NOMBREGRUPO')
+        ->get();
     }
 }

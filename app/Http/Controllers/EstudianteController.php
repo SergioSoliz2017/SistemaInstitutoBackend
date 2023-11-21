@@ -19,7 +19,6 @@ class EstudianteController extends Controller
         $registro->COSTOINSCRIPCION = $request->COSTOINSCRIPCION;
         $registro->CODSEDE = $request->SEDE;
         $registro->HABILITADO = $request->HABILITADO;
-        $registro->SALDO = $request->SALDO;
         $registro->save();
         if ($request->HUELLA === "NoVirtual") {
             $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $request->CODESTUDIANTE . '.txt';
@@ -66,25 +65,45 @@ class EstudianteController extends Controller
         }
     }
 
-    public function show()
+    public function show($sede)
     {
-        $estudiantes = Estudiante::select(
-            'CODESTUDIANTE',
-            'CODINSCRIPCION',
-            "NOMBREESTUDIANTE",
-            "APELLIDOESTUDIANTE",
-            "FECHANACIMIENTOESTUDIANTE",
-            "GENEROESTUDIANTE",
-            "DIRECCION",
-            "COLEGIO",
-            "TURNO",
-            "CURSO",
-            "TIPOCOLEGIO",
-            "PAIS",
-            "DEPARTAMENTO",
-            "CIUDAD",
-            "HABILITADO",
-        )->get();
+        if ($sede === "NACIONAL") {
+            $estudiantes = Estudiante::select(
+                'CODESTUDIANTE',
+                'CODINSCRIPCION',
+                "NOMBREESTUDIANTE",
+                "APELLIDOESTUDIANTE",
+                "FECHANACIMIENTOESTUDIANTE",
+                "GENEROESTUDIANTE",
+                "DIRECCION",
+                "COLEGIO",
+                "TURNO",
+                "CURSO",
+                "TIPOCOLEGIO",
+                "PAIS",
+                "DEPARTAMENTO",
+                "CIUDAD",
+                "HABILITADO",
+            )->get();
+        } else {
+            $estudiantes = Estudiante::select(
+                'CODESTUDIANTE',
+                'CODINSCRIPCION',
+                "NOMBREESTUDIANTE",
+                "APELLIDOESTUDIANTE",
+                "FECHANACIMIENTOESTUDIANTE",
+                "GENEROESTUDIANTE",
+                "DIRECCION",
+                "COLEGIO",
+                "TURNO",
+                "CURSO",
+                "TIPOCOLEGIO",
+                "PAIS",
+                "DEPARTAMENTO",
+                "CIUDAD",
+                "HABILITADO",
+            )->where("CODSEDE", $sede)->get();
+        }
         return $estudiantes;
     }
 

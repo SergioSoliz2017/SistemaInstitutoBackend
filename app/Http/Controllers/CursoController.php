@@ -26,22 +26,9 @@ class CursoController extends Controller
     {
         $curso = new Curso();
         $curso->CODCURSO = $request->CODCURSO;
-        $curso->CODSEDE = $request->CODSEDE;
         $curso->CURSO = $request->CURSO;
-        $curso->DURACIONCURSO = $request->DURACIONCURSO;
+        $curso->ESTADO = "Activo";
         $curso->save();
-
-        $lista = $request->LISTAGRUPOS;
-
-        foreach ($lista as $grupo) {
-            $grupoN = new Grupo();
-            $grupoN->CODCURSO = $curso->CODCURSO; // Usar $curso en lugar de $grupo
-            $grupoN->CODSEDE = $grupo['CODSEDE']; // Acceder a las propiedades como array
-            $grupoN->NOMBREGRUPO = $grupo['NOMBREGRUPO'];
-            $grupoN->CANTIDADMAXIMA = $grupo['CANTIDADMAXIMA'];
-            $grupoN->save();
-        }
-        return "listo";
     }
 
     public function eliminarCurso(Request $request)

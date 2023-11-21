@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class GrupoInscrito extends Model
 {
     use HasFactory;
-    protected $table = "GRUPOINSCRITO";
+    protected $table = "grupoinscrito";
+    protected $primaryKey="CODGRUPOINSCRITO";
     protected $fillable = [
         "CODESTUDIANTE",
         "CODCURSOINSCRITO",
-        "INICIOCLASES",
+        "CODGRUPOINSCRITO",
         "NOMBREGRUPO",
+        "ESTADO",
+        "DIASPAGADOS",
+        "FECHAINICIO"
     ];
 
     public $timestamps = false;

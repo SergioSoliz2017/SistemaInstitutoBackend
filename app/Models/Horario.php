@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Horario extends Model
 {
     use HasFactory;
-    protected $table = "HORARIO";
+    protected $table = "horario";
     protected $fillable = [
         "CODSEDE",
         "CODCURSO",
+        "CODGRUPO",
         "DIA",
         "HORA",
-        "GRUPO"
     ];
 
     public $timestamps = false;

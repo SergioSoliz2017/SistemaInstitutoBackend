@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Registro extends Model
+class Sede extends Model
 {
     use HasFactory;
-    protected $table="registro";
-    protected $primaryKey="CODINSCRIPCION";
+    protected $table="sede";
+    protected $primaryKey="CODSEDE";
     protected $fillable = [
-    "CODINSCRIPCION",
-    "CODTRABAJADOR",
-    "FECHAINSCRIPCION",
-    "COSTOINSCRIPCION",
     "CODSEDE",
-    "HABILITADO"];
-
+    "UBICACION",
+    "NOMBRESEDE",];
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
+
+    public function trabajadores()
+    {
+        return $this->belongsToMany(Trabajador::class, 'trabajadorsed', 'CODTRABAJADOR', 'CODSEDE');
+    }
 }

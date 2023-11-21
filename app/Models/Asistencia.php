@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Asistencia extends Model
 {
     use HasFactory;
-    protected $table = "ASISTENCIA";
+    protected $table = "asistencia";
     protected $fillable = [
         "CODESTUDIANTE",
         "CODCURSOINSCRITO",
+        "CODGRUPOINSCRITO",
         "ESTADO", "FECHA",
         "OBSERVACION",
         "GRUPO",

@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Curso extends Model
 {
     use HasFactory;
-    protected $table = "CURSO";
+    protected $table = "curso";
     protected $primaryKey = "CODCURSO";
     protected $fillable = [
         "CODCURSO",
-        "CODSEDE ",
         "CURSO",
-        "PRECIO",
-        "DURACIONCURSO"
+        "ESTADO",
     ];
 
     public $incrementing = false;

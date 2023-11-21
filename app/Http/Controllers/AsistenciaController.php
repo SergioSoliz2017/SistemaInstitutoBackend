@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 
 class AsistenciaController extends Controller
 {
-    public function obtenerAsistencia($codEst , $codCurso)
+    public function obtenerAsistencia($codEst, $codCurso, $codGrupo)
     {
-        return Asistencia::join('CURSOINSCRITO', 'ASISTENCIA.CODCURSOINSCRITO', '=', 'CURSOINSCRITO.CODCURSOINSCRITO')
-        ->where("ASISTENCIA.CODESTUDIANTE", $codEst)
-        ->where("ASISTENCIA.CODCURSOINSCRITO", $codCurso)
-        ->select('ASISTENCIA.*', 'CURSOINSCRITO.CURSOINSCRITO')
-        ->distinct()
-        ->get();
+        return Asistencia::where("CODESTUDIANTE", $codEst)
+            ->where("CODCURSOINSCRITO", $codCurso)
+            ->where("CODGRUPOINSCRITO", $codGrupo)
+            ->distinct()
+            ->get();
     }
 }

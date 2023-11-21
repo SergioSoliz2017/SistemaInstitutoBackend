@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tutor extends Model
 {
     use HasFactory;
-    protected $table = "TUTOR";
+    protected $table = "tutor";
     protected $primaryKey = "CODTUTOR";
     protected $fillable = [
         "CODTUTOR",
@@ -20,7 +20,6 @@ class Tutor extends Model
         "GENEROTUTOR",
         "CORREO",
         "OCUPACION",
-        "RELACION",
         "ESTADO"
     ];
     public $incrementing = false;
@@ -44,7 +43,8 @@ class Tutor extends Model
             'ESTUDIANTE.PAIS',
             'ESTUDIANTE.DEPARTAMENTO',
             'ESTUDIANTE.CIUDAD',
-            'ESTUDIANTE.HABILITADO'
-        );
+            'ESTUDIANTE.HABILITADO',
+            'ESTUDIANTE.CODSEDE'
+        )->withPivot('RELACION');
     }
 }
