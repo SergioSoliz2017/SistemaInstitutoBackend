@@ -30,7 +30,7 @@ class CursoInscritoController extends Controller
             $grupo->NOMBREGRUPO = $curso['NOMBREGRUPO'];
             $grupo->ESTADO = "Habilitado";
             $grupo->DIASPAGADOS = $curso['DIAPAGADO'];
-            $grupo->FECHAINICIO = date('Y-m-d', strtotime($request->FECHA));
+            $grupo->FECHAINICIO = $request->FECHA;
             $grupo->save();
 
             $horariosCurso = Horario::where('CODSEDE', $request->SEDE)

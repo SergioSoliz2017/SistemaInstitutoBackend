@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Registro;
 use App\Models\Tutor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EstudianteController extends Controller
@@ -64,6 +65,19 @@ class EstudianteController extends Controller
             $estudiante->save();
         }
     }
+
+    public function subirArchivo(Request $request)
+    {
+        $codigoEstudiante = $request->CODESTUDIANTE;
+        $contenidoArchivo = $request->HUELLA;
+
+        $rutaDestino = 'C:\InfinityChess\RegistrarHuella\Huellas\\';
+        $nombreArchivo = $codigoEstudiante . '.txt';
+
+        file_put_contents($rutaDestino . $nombreArchivo, $contenidoArchivo);
+        return  "Subido";
+    }
+
 
     public function show($sede)
     {
@@ -147,5 +161,54 @@ class EstudianteController extends Controller
         } else {
             return response()->json(['mensaje' => 'Registro no encontrado'], 404);
         }
+    }
+
+    public function verificar()
+    {
+
+        $resultado = DB::select("
+    SELECT
+        e.CODESTUDIANTE AS CodEstudiante,
+        e.NOMBREESTUDIANTE AS Nombre,
+        e.APELLIDOESTUDIANTE AS Apellido,
+        e.HABILITADO AS Habilitado,
+        e.HUELLAESTUDIANTE AS HuellaEstudiante,
+        e.CODSEDE AS CodSede,
+        h.CODCURSOINSCRITO AS CodCurso,
+        h.DIA,
+        h.HORA,
+        gi.DIASPAGADOS,
+        h.CODGRUPOINSCRITO AS GRUPO,
+        ci.ESTADO AS EstadoCurso,
+        gi.FECHAINICIO,
+        gi.ESTADO AS EstadoGrupo,
+        a.ESTADO AS EstadoAsistencia,
+        a.FECHA,
+        a.ENTRADA,
+        a.SALIDA,
+        r.HABILITADO AS HabilitadoRegistro
+    FROM
+        Estudiante e
+    INNER JOIN
+        HorarioEstudiante h ON e.CODESTUDIANTE = h.CODESTUDIANTE
+    LEFT JOIN
+        CursoInscrito ci ON e.CODESTUDIANTE = ci.CODESTUDIANTE AND h.CODCURSOINSCRITO = ci.CODCURSOINSCRITO
+    LEFT JOIN
+        GrupoInscrito gi ON e.CODESTUDIANTE = gi.CODESTUDIANTE AND h.CODCURSOINSCRITO = gi.CODCURSOINSCRITO AND h.CODGRUPOINSCRITO = gi.CODGRUPOINSCRITO
+    LEFT JOIN
+        Asistencia a ON e.CODESTUDIANTE = a.CODESTUDIANTE AND h.CODCURSOINSCRITO = a.CODCURSOINSCRITO
+    LEFT JOIN
+        Registro r ON e.CODINSCRIPCION = r.CODINSCRIPCION
+    WHERE
+        h.DIA = 'Lunes' AND
+        e.CODSEDE = 'COCHABAMBA'
+");
+
+
+        array_walk_recursive($resultado, function (&$item) {
+            $item = is_string($item) ? utf8_encode($item) : $item;
+        });
+
+        return response()->json($resultado);
     }
 }
