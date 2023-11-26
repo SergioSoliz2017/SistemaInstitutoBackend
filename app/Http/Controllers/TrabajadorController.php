@@ -15,9 +15,15 @@ class TrabajadorController extends Controller
 
         return $trabajador;
     }
-    public function show()
+    public function show($sede)
     {
-        return Trabajador::all();
+        if ($sede === "NACIONAL") {
+            return Trabajador::with('sedes')->get();
+        } else {
+            return Trabajador::whereHas('sedes', function($query) use ($sede) {
+                $query->where('sede.CODSEDE', $sede);
+            })->with('sedes')->get();
+        }
     }
     public function add(Request $request)
     {

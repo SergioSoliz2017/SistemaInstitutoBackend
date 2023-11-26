@@ -5,13 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Curso;
 use App\Models\Grupo;
+use Illuminate\Support\Facades\DB;
 
 class CursoController extends Controller
 {
-    public function show()
+    public function show($sede)
     {
-        return Curso::get();
+        if ($sede === "NACIONAL") {
+            $cursos = Curso::addSelect(['CODCURSO', 'CURSO', 'ESTADO'])
+                ->addSelect(DB::raw('(SELECT COUNT(*) FROM grupo WHERE grupo.CODCURSO = curso.CODCURSO) as Cantidad'))
+                ->get();
+        } else {
+            $cursos = Curso::addSelect(['CODCURSO', 'CURSO', 'ESTADO'])
+                ->addSelect(DB::raw('(SELECT COUNT(*) FROM grupo WHERE grupo.CODCURSO = curso.CODCURSO AND grupo.CODSEDE = ?) as Cantidad'))
+                ->addBinding($sede, 'select')
+                ->get();
+        }
+
+
+        return $cursos;
     }
+
 
     public function buscarCurso($id)
     {

@@ -39,7 +39,7 @@ Route::get('/obtenerTutor/{id}', [App\Http\Controllers\TutorController::class,"b
 Route::get('/obtenerEstudiante/{id}',[App\Http\Controllers\EstudianteController::class,"buscarEstudiante"]);
 Route::get('/obtenerTutores/{sede}',[App\Http\Controllers\TutorController::class,"show"]);
 Route::get('/obtenerTutoresActivos',[App\Http\Controllers\TutorController::class,"showActivo"]);
-Route::get('/obtenerCursos',[App\Http\Controllers\CursoController::class,"show"]);
+Route::get('/obtenerCursos/{sede}',[App\Http\Controllers\CursoController::class,"show"]);
 Route::get('/obtenerCurso/{id}',[App\Http\Controllers\CursoController::class,"buscarCurso"]);
 Route::get('/obtenerGrupo/{id}/{sede}',[App\Http\Controllers\GrupoController::class,"buscarGrupo"]);
 Route::get('/obtenerGrupoLimite/{id}/{sede}',[App\Http\Controllers\GrupoController::class,"buscarGrupoLimite"]);
@@ -55,7 +55,7 @@ Route::post('/obtenerHorario',[App\Http\Controllers\HorarioController::class,"ob
 Route::get('/obtenerHorarioEstudiante/{id}',[App\Http\Controllers\HorarioEstudianteController::class,"obtenerHorarios"]);
 Route::get('/obtenerAsistencia/{codEst}/{codCurso}/{codGrupo}',[App\Http\Controllers\AsistenciaController::class,"obtenerAsistencia"]);
 Route::get('/obtenerSedes',[App\Http\Controllers\SedeController::class,"show"]);
-Route::get('/obtenerTrabajadores',[App\Http\Controllers\TrabajadorController::class,"show"]);
+Route::get('/obtenerTrabajadores/{sede}',[App\Http\Controllers\TrabajadorController::class,"show"]);
 Route::get('/obtenerTrabajador/{id}',[App\Http\Controllers\TrabajadorController::class,"obtenerTrabajador"]);
 
 Route::put('/actualizarTutor/{id}', [App\Http\Controllers\TutorController::class,"update"]);
