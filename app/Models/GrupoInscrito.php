@@ -16,8 +16,9 @@ class GrupoInscrito extends Model
         "CODGRUPOINSCRITO",
         "NOMBREGRUPO",
         "ESTADO",
-        "DIASPAGADOS",
-        "FECHAINICIO"
+        "NUMEROCLASES",
+        "FECHAINICIO",
+        "FECHAFIN"
     ];
 
     public $timestamps = false;

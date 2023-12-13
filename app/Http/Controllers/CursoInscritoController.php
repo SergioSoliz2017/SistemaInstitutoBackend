@@ -8,7 +8,7 @@ use App\Models\Grupo;
 use App\Models\GrupoInscrito;
 use App\Models\Horario;
 use App\Models\HorarioEstudiante;
-
+use Carbon\Carbon;
 class CursoInscritoController extends Controller
 {
     public function agregarCursoInscrito(Request $request)
@@ -29,10 +29,12 @@ class CursoInscritoController extends Controller
             $grupo->CODGRUPOINSCRITO = $curso['CODGRUPO'];
             $grupo->NOMBREGRUPO = $curso['NOMBREGRUPO'];
             $grupo->ESTADO = "Habilitado";
-            $grupo->DIASPAGADOS = $curso['DIAPAGADO'];
             $grupo->FECHAINICIO = $request->FECHA;
-            $grupo->save();
 
+            $fechaInicio = Carbon::parse($request->FECHA);
+            $fechaFin = $fechaInicio->copy()->addMonths($curso['MESES']);
+            
+            $grupo->FECHAFIN = $fechaFin;
             $horariosCurso = Horario::where('CODSEDE', $request->SEDE)
                 ->where('CODCURSO', $curso['CODCURSO'])
                 ->where('CODGRUPO', $curso['CODGRUPO'])->get();
@@ -46,7 +48,13 @@ class CursoInscritoController extends Controller
                 $horario->HORA = $dia->HORA;
                 $horario->save();
             }
+            $tamanoHorariosCurso = $horariosCurso->count();
+            $diferenciaSemanas = $fechaInicio->diffInWeeks($fechaFin);
+            $cantidadTotalClases = $tamanoHorariosCurso * $diferenciaSemanas;
+            $grupo-> NUMEROCLASES = $cantidadTotalClases;
+            $grupo->save();
         }
+
         return "listo";
     }
 }

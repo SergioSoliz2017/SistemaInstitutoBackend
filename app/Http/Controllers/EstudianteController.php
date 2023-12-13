@@ -18,6 +18,7 @@ class EstudianteController extends Controller
         $registro->CODTRABAJADOR = $request->CODTRABAJADOR;
         $registro->FECHAINSCRIPCION = $request->FECHAINSCRIPCION;
         $registro->COSTOINSCRIPCION = $request->COSTOINSCRIPCION;
+        $registro->SALDO = $request-> SALDO;
         $registro->CODSEDE = $request->SEDE;
         $registro->HABILITADO = $request->HABILITADO;
         $registro->save();
