@@ -16,10 +16,15 @@ class GrupoInscrito extends Model
         "CODGRUPOINSCRITO",
         "NOMBREGRUPO",
         "ESTADO",
-        "NUMEROCLASES",
-        "FECHAINICIO",
-        "FECHAFIN"
+        "DIASPAGADOS",
+        "FECHAINICIO"
     ];
 
     public $timestamps = false;
+
+   public function horariosEstudiante()
+    {
+        return $this->hasMany(HorarioEstudiante::class, 'CODGRUPOINSCRITO');
+    }
+
 }

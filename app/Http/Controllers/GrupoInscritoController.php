@@ -18,4 +18,10 @@ class GrupoInscritoController extends Controller
     public function buscarGrupo ($id){
         return GrupoInscrito::where("NOMBREGRUPO",$id)->get();
     }
+    public function obtenerFecha ($codEst,$codCurso,$codGrupo){
+        return GrupoInscrito::where("CODESTUDIANTE", $codEst)
+        ->where("CODCURSOINSCRITO", $codCurso)
+        ->where("CODGRUPOINSCRITO", $codGrupo)
+        ->pluck('FECHAINICIO');
+      }
 }

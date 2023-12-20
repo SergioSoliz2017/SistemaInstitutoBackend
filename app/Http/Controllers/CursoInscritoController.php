@@ -38,7 +38,11 @@ class CursoInscritoController extends Controller
             $horariosCurso = Horario::where('CODSEDE', $request->SEDE)
                 ->where('CODCURSO', $curso['CODCURSO'])
                 ->where('CODGRUPO', $curso['CODGRUPO'])->get();
-
+                $tamanoHorariosCurso = $horariosCurso->count();
+                $diferenciaSemanas = $fechaInicio->diffInWeeks($fechaFin);
+                $cantidadTotalClases = $tamanoHorariosCurso * $diferenciaSemanas;
+                $grupo-> NUMEROCLASES = $cantidadTotalClases;
+                $grupo->save();
             foreach ($horariosCurso as $dia) {
                 $horario = new HorarioEstudiante();
                 $horario->CODESTUDIANTE = $codigoEstudiante;
@@ -48,11 +52,7 @@ class CursoInscritoController extends Controller
                 $horario->HORA = $dia->HORA;
                 $horario->save();
             }
-            $tamanoHorariosCurso = $horariosCurso->count();
-            $diferenciaSemanas = $fechaInicio->diffInWeeks($fechaFin);
-            $cantidadTotalClases = $tamanoHorariosCurso * $diferenciaSemanas;
-            $grupo-> NUMEROCLASES = $cantidadTotalClases;
-            $grupo->save();
+            
         }
 
         return "listo";

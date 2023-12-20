@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DpfpApi\UserRestApiController;
 use App\Http\Controllers\DpfpApi\TempFingerprintController;
-use App\Http\Controllers\EstudianteController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +15,7 @@ use App\Http\Controllers\EstudianteController;
 */
 
 Route::get('/',function(){
-    return "holamundoas";
+    return "ooool";
 });
 
 
@@ -59,7 +57,7 @@ Route::get('/obtenerAsistencia/{codEst}/{codCurso}/{codGrupo}',[App\Http\Control
 Route::get('/obtenerSedes',[App\Http\Controllers\SedeController::class,"show"]);
 Route::get('/obtenerTrabajadores/{sede}',[App\Http\Controllers\TrabajadorController::class,"show"]);
 Route::get('/obtenerTrabajador/{id}',[App\Http\Controllers\TrabajadorController::class,"obtenerTrabajador"]);
-Route::get('/obtenerVerificacion',[App\Http\Controllers\EstudianteController::class,"verificar"]);
+Route::get('/obtenerInicio/{codEst}/{codCurso}/{codGrupo}',[App\Http\Controllers\GrupoInscritoController::class,"obtenerFecha"]);
 
 Route::put('/actualizarTutor/{id}', [App\Http\Controllers\TutorController::class,"update"]);
 Route::put('/actualizarEstudiante/{id}', [App\Http\Controllers\EstudianteController::class,"update"]);
@@ -75,3 +73,4 @@ Route::delete('/eliminarGrupo',[App\Http\Controllers\GrupoController::class,"eli
 Route::delete('/eliminarCurso',[App\Http\Controllers\CursoController::class,"eliminarCurso"]);
 
 Route::post('/subirArchivo', [App\Http\Controllers\EstudianteController::class, 'subirArchivo']);
+Route::get('/contra/{id}',[App\Http\Controllers\TrabajadorController::class,"crearContra"]);

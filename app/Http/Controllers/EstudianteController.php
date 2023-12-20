@@ -23,7 +23,8 @@ class EstudianteController extends Controller
         $registro->HABILITADO = $request->HABILITADO;
         $registro->save();
         if ($request->HUELLA === "NoVirtual") {
-            $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $request->CODESTUDIANTE . '.txt';
+        $registro->CODSEDE = $request->SEDE;
+            $rutaArchivo = 'C:\InfinityChess\RegistrarHuella\Huellas\\' . $request->SEDE ."\\". $request->CODESTUDIANTE . '.txt';
             $contenido = file_get_contents($rutaArchivo);
             Storage::put("/" . $request->SEDE . '\\' . $request->CODESTUDIANTE . '.txt', $contenido);
             $estudiante = new Estudiante();
@@ -69,13 +70,26 @@ class EstudianteController extends Controller
 
     public function subirArchivo(Request $request)
     {
-        $codigoEstudiante = $request->CODESTUDIANTE;
-        $contenidoArchivo = $request->HUELLA;
+        $codigoEstudiante = $request->input('CODESTUDIANTE');
+        $contenidoArchivo = base64_decode($request->input('HUELLA'));
+        $sede = $request->input('SEDE');
 
-        $rutaDestino = 'C:\InfinityChess\RegistrarHuella\Huellas\\';
-        $nombreArchivo = $codigoEstudiante . '.txt';
+    // Ruta base de destino en tu sistema de archivos
+    $rutaBase = 'C:\\InfinityChess\\RegistrarHuella\\Huellas\\';
 
-        file_put_contents($rutaDestino . $nombreArchivo, $contenidoArchivo);
+    // Ruta completa de destino incluyendo la sede
+    $rutaDestino = $rutaBase . $sede . "\\";
+
+    // Verificar si el directorio de la sede no existe y crearlo si es necesario
+    if (!file_exists($rutaDestino)) {
+        mkdir($rutaDestino, 0755, true);
+    }
+
+    // Nombre del archivo en el servidor
+    $nombreArchivo = $codigoEstudiante . '.txt';
+
+    // Guardar el contenido binario en el archivo
+    file_put_contents($rutaDestino . $nombreArchivo, $contenidoArchivo);
         return  "Subido";
     }
 

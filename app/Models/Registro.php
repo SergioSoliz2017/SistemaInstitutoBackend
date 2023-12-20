@@ -16,7 +16,6 @@ class Registro extends Model
     "FECHAINSCRIPCION",
     "COSTOINSCRIPCION",
     "CODSEDE",
-    "SALDO",
     "HABILITADO"];
 
     public $incrementing = false;

@@ -18,4 +18,9 @@ class HorarioEstudiante extends Model
     ];
 
     public $timestamps = false;
+
+    public function grupoInscrito()
+    {
+        return $this->belongsTo(GrupoInscrito::class, 'CODGRUPOINSCRITO');
+    }
 }

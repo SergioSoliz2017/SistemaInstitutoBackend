@@ -25,6 +25,9 @@ class TrabajadorController extends Controller
             })->with('sedes')->get();
         }
     }
+    public function crearContra ($id){
+        return Crypt::encryptString($id);
+    }
     public function add(Request $request)
     {
         $contrasenaCifrada = Crypt::encryptString($request->CONTRASEÑA);
